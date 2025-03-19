@@ -1,37 +1,30 @@
 #include <stdio.h>
-
-struct Person {
-    char name[40];
-    int age;
-} typedef Person;
-
-
-int main(){
-    
-    Person persons[4] = {{"Daniel", 19}, {"Mateus", 21}, {"Bruno", 30}, {"Guilherme", 20}};
-
-    int array_size = sizeof(persons) / sizeof(persons[0]);
-    Person temp;
-    int swapped;
-
-    for(int i = 0; i < array_size - 1; i++){
-        swapped = 0;
-        for(int j = 0; j < array_size - i - 1; j++ ){
-            if(persons[j].age > persons[j+1].age){
-                temp = persons[j];
-                persons[j] = persons[j + 1];
-                persons[j+1] = temp;
-                swapped = 1;  
-            }        
-        }
-        if(swapped == 0){
-                break;
+int main()
+{
+    int arr[] = {5, 4, 6, 3, 2, 9, 1};
+    int tamanho = sizeof(arr) / sizeof(arr[0]);
+    int i, j, temp, trocou;
+    for (i = 0; i < tamanho - 1; i++)
+    {
+        trocou = 0;
+        for (j = 0; j < tamanho - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                trocou = 1;
             }
+        }
+        if (trocou == 0)
+        {
+            break; // Se não houve troca, a lista já está ordenada
+        }
     }
-
-    for (int i = 0; i < array_size; i++) {
-        printf("Name: %s\nAge: %d\n", persons[i].name, persons[i].age);
+    for (int i = 0; i < tamanho; i++)
+    {
+        printf("%d ", arr[i]);
     }
-
     return 0;
 }
