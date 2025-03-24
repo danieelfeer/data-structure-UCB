@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/daniel.beserra/Documents/data-structure",
-      "program": "c:/Users/daniel.beserra/Documents/data-structure/build/Debug/outDebug",
+      "cwd": "c:/Users/danielfernandes/Documents/data-structure-UCB/algorithms/sorting/advanced/merge",
+      "program": "c:/Users/danielfernandes/Documents/data-structure-UCB/algorithms/sorting/advanced/merge/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
