@@ -1,57 +1,84 @@
 #include <stdio.h>
-#include <malloc.h>
+#include <string.h>
+#include <stdlib.h>
 
 struct Product
 {
-    char name [40];
+    char name[40];
     int quantity;
 } typedef Product;
-
 
 struct Node
 {
     Product product;
-    struct Node *next;    
+    struct Node *next;
 } typedef Node;
 
-
-void insertProductHeadLinkedList(Node **tail, Product product){
-    Node *newNode =  (Node *)malloc(sizeof(Node));
-    newNode -> product = product;
-    newNode -> next = *tail;
-    *tail = newNode;
+Node* createNode(Product product)
+{
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->product = product;
+    newNode->next = NULL;
+    return newNode;
 }
 
-void insertProductTailLinkedList(Node **head, Product product) {
-    Node *newNode = (Node *)malloc(sizeof(Node));
-    newNode->product = product;
+void insertAtBeginning(Node **head, Product product)
+{
+    Node* newNode = createNode(product);
     newNode->next = *head;
     *head = newNode;
 }
 
-int main() {
-    Node *head = NULL;
-    Product newProduct = {"Head Product", 100};
-
-    insertProductTailLinkedList(&head, newProduct);
-
-    Product products[5] = {
-        {"Product 1", 10},
-        {"Product 2", 20},
-        {"Product 3", 30},
-        {"Product 4", 40},
-        {"Product 5", 50}
-    };
-
-    for (int i = 0; i < 5; i++) {
-        insertProductHeadLinkedList(&head, products[i]);
+void insertAtEnd(Node **head, Product product)
+{
+    Node* newNode = createNode(product);
+    if (*head == NULL)
+    {
+        *head = newNode;
+        return;
     }
+    
+    Node* temp = *head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
 
-    printf("\nLista de produtos:\n");
-    Node *current = head;
-    while (current != NULL) {
-        printf("Name: %s, Quantity: %d\n", current->product.name, current->product.quantity);
-        current = current->next;
+void printList(Node *head)
+{
+    Node* temp = head;
+    while (temp != NULL)
+    {
+        printf("Products: %s | Quantity: %d\n", temp->product.name, temp->product.quantity);
+       temp = temp->next;
+    }
+}
+
+int main()
+{
+    Node *head = NULL;
+
+    Product p1 = {"Rice", 10};
+    Product p2 = {"Beans", 5};
+    Product p3 = {"Pasta", 7};
+    Product p4 = {"Meat", 2};
+
+    insertAtEnd(&head, p1); 
+    insertAtBeginning(&head, p2);
+    insertAtEnd(&head, p3); 
+    insertAtBeginning(&head, p4);
+
+    printf("List:\n");
+    printList(head);
+    Node* temp;
+
+    while (head != NULL)
+    {
+        temp = head;
+        head = head->next;
+        free(temp);
     }
 
     return 0;
